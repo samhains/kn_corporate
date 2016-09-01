@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Image,
   Text,
+  TextInput,
   View
 } from 'react-native';
 
@@ -57,12 +58,19 @@ const CounterView = React.createClass({
   render() {
     const loadingStyle = this.props.loading
       ? {backgroundColor: '#eee'}
-      : null;
+          : null;
 
     return (
       <View style={styles.container}>
 
         {this.renderUserInfo()}
+
+        <Text style={styles.title}>
+        Search for a Suburb
+        </Text>
+        <TextInput
+          style={styles.searchInput}
+        />
 
         <TouchableOpacity
           onPress={this.increment}
@@ -134,6 +142,16 @@ const styles = StyleSheet.create({
     color: 'black',
     marginBottom: 5,
     padding: 5
+  },
+  searchInput: {
+    height: 50,
+    padding: 4,
+    marginRight: 5,
+    fontSize: 23,
+    borderWidth: 1,
+    borderColor: 'black',
+    borderRadius: 8,
+    color: 'black'
   },
   linkButton: {
     textAlign: 'center',

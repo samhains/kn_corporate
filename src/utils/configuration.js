@@ -21,3 +21,5 @@ export function getConfiguration(key) {
 
   return configuration.get(key);
 }
+
+configuration.setConfiguration('API_ROOT', "http://corporate-care.apiblueprint.org");
