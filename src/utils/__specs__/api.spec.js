@@ -7,7 +7,7 @@ import fetch from 'fetch-mock';
 import HttpError from 'standard-http-error';
 
 import * as api from '../api';
-import * as configuration from '../configuration';
+import configure from 'configure';
 
 const API_ROOT = 'https://mock.getpepperoni.com';
 const SIMPLE_ENDPOINT = '/endpoint';

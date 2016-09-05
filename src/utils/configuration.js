@@ -1,5 +1,6 @@
 import {Map} from 'immutable';
 
+var API_ROOT = 'https://private-cef4b-corporatecare.apiary-mock.com'
 let configuration = Map();
 
 export function setConfiguration(name, value) {
@@ -19,7 +20,11 @@ export function getConfiguration(key) {
     throw new Error('Undefined configuration key: ' + key);
   }
 
+
   return configuration.get(key);
 }
 
-configuration.setConfiguration('API_ROOT', "http://corporate-care.apiblueprint.org");
+
+export default function init() {
+  setConfiguration('API_ROOT', API_ROOT);
+}

@@ -62,6 +62,7 @@ export async function del(path, suppressRedBox) {
  * @param {Boolean} suppressRedBox If true, no warning is shown on failed request
  */
 export async function request(method, path, body, suppressRedBox) {
+
   try {
     const response = await sendRequest(method, path, body, suppressRedBox);
     return handleResponse(
@@ -99,7 +100,7 @@ async function sendRequest(method, path, body) {
     const options = body
       ? {method, headers, body: JSON.stringify(body)}
       : {method, headers};
-
+ 
     return timeout(fetch(endpoint, options), TIMEOUT);
   } catch (e) {
     throw new Error(e);
@@ -140,8 +141,8 @@ async function handleResponse(path, response) {
 
 function getRequestHeaders(body, token) {
   const headers = body
-    ? {'Accept': 'application/json', 'Content-Type': 'application/json'}
-    : {'Accept': 'application/json'};
+    ? {'Accept': 'application/vnd.api+json', 'Content-Type': 'application/vnd.api+json'}
+    : {'Accept': 'application/vnd.api+json'};
 
   if (token) {
     return {...headers, Authorization: token};

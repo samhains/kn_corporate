@@ -1,5 +1,6 @@
 import {Map} from 'immutable';
 import {loop, Effects} from 'redux-loop';
+import {centersBySuburb} from '../../services/kindynow';
 import {generateRandomNumber} from '../../services/randomNumberService';
 
 // Initial state
@@ -9,49 +10,45 @@ const initialState = Map({
 });
 
 // Actions
-const INCREMENT = 'CounterState/INCREMENT';
+const UPDATE_SUBURB_NAME = 'CounterState/UPDATE_SUBURB_NAME';
+const SEARCH_SUBURB_NAME = 'CounterState/SEARCH_SUBURB_NAME';
 const RESET = 'CounterState/RESET';
-const RANDOM_REQUEST = 'CounterState/RANDOM_REQUEST';
-const RANDOM_RESPONSE = 'CounterState/RANDOM_RESPONSE';
+const SEARCH_REQUEST = 'CounterState/SEARCH_REQUEST';
+const SEARCH_RESPONSE = 'CounterState/SEARCH_RESPONSE';
 
 // Action creators
-export function increment() {
-  return {type: INCREMENT};
+export function submit(suburb) {
+  console.log('sbmitting', suburb)
+  return {type: SEARCH_REQUEST, suburb };
 }
 
-export function reset() {
-  return {type: RESET};
+export function change(suburb) {
+  return {type: UPDATE_SUBURB_NAME, suburb };
 }
 
-export function random() {
-  return {
-    type: RANDOM_REQUEST
-  };
-}
-
-export async function requestRandomNumber() {
-  return {
-    type: RANDOM_RESPONSE,
-    payload: await generateRandomNumber()
+export function requestCentersBySuburb(suburb) {
+  return async () => {
+    return {
+      type: SEARCH_RESPONSE,
+      payload:  await centersBySuburb(suburb)
+    }
   };
 }
 
 // Reducer
 export default function CounterStateReducer(state = initialState, action = {}) {
   switch (action.type) {
-    case INCREMENT:
-      return state.update('value', value => value + 1);
+    case UPDATE_SUBURB_NAME:
+      return state.update('suburb', suburb => action.suburb);
 
-    case RESET:
-      return initialState;
-
-    case RANDOM_REQUEST:
+    case SEARCH_REQUEST:
       return loop(
         state.set('loading', true),
-        Effects.promise(requestRandomNumber)
+        Effects.promise(requestCentersBySuburb(action.suburb))
       );
 
-    case RANDOM_RESPONSE:
+    case SEARCH_RESPONSE:
+      console.log('payload!', action.payload);
       return state
         .set('loading', false)
         .set('value', action.payload);
