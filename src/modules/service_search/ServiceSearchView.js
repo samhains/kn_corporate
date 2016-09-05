@@ -1,4 +1,4 @@
-import * as CounterState from './CounterState';
+import * as ServiceSearchState from './ServiceSearchState';
 import * as NavigationState from '../../modules/navigation/NavigationState';
 import React, {PropTypes} from 'react';
 import Calendar from 'react-native-calendar';
@@ -11,17 +11,17 @@ import {
   View
 } from 'react-native';
 
-const CounterView = React.createClass({
+const ServiceSearchView = React.createClass({
   propTypes: {
     suburb: PropTypes.string,
     loading: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired
   },
   handleChange(event) {
-    this.props.dispatch(CounterState.change(event.nativeEvent.text));
+    this.props.dispatch(ServiceSearchState.change(event.nativeEvent.text));
   },
   handleSubmit() {
-    this.props.dispatch(CounterState.submit(this.props.suburb));
+    this.props.dispatch(ServiceSearchState.submit(this.props.suburb));
 
     this.props.dispatch(NavigationState.pushRoute({
       key: 'Color',
@@ -82,4 +82,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default CounterView;
+export default ServiceSearchView;

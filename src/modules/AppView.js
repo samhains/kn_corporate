@@ -14,6 +14,7 @@ const AppView = React.createClass({
     dispatch: PropTypes.func.isRequired
   },
   componentDidMount() {
+
     snapshotUtil.resetSnapshot()
       .then(snapshot => {
         const {dispatch} = this.props;

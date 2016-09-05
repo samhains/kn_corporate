@@ -2,15 +2,14 @@ import {Map} from 'immutable';
 import {combineReducers} from 'redux-loop';
 import NavigationStateReducer from '../modules/navigation/NavigationState';
 import AuthStateReducer from '../modules/auth/AuthState';
-import CounterStateReducer from '../modules/counter/CounterState';
+import ServiceSearchStateReducer from '../modules/service_search/ServiceSearchState';
 import SessionStateReducer, {RESET_STATE} from '../modules/session/SessionState';
 
 const reducers = {
   // Authentication/login state
   auth: AuthStateReducer,
 
-  // Counter sample app state. This can be removed in a live application
-  counter: CounterStateReducer,
+  serviceSearch: ServiceSearchStateReducer,
 
   // @NOTE: By convention, the navigation state must live in a subtree called
   //`navigationState`

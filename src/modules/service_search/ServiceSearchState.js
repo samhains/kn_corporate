@@ -10,15 +10,14 @@ const initialState = Map({
 });
 
 // Actions
-const UPDATE_SUBURB_NAME = 'CounterState/UPDATE_SUBURB_NAME';
-const SEARCH_SUBURB_NAME = 'CounterState/SEARCH_SUBURB_NAME';
-const RESET = 'CounterState/RESET';
-const SEARCH_REQUEST = 'CounterState/SEARCH_REQUEST';
-const SEARCH_RESPONSE = 'CounterState/SEARCH_RESPONSE';
+const UPDATE_SUBURB_NAME = 'ServiceSearchState/UPDATE_SUBURB_NAME';
+const SEARCH_SUBURB_NAME = 'ServiceSearchState/SEARCH_SUBURB_NAME';
+const RESET = 'ServiceSearchState/RESET';
+const SEARCH_REQUEST = 'ServiceSearchState/SEARCH_REQUEST';
+const SEARCH_RESPONSE = 'ServiceSearchState/SEARCH_RESPONSE';
 
 // Action creators
 export function submit(suburb) {
-  console.log('sbmitting', suburb)
   return {type: SEARCH_REQUEST, suburb };
 }
 
@@ -36,7 +35,7 @@ export function requestCentersBySuburb(suburb) {
 }
 
 // Reducer
-export default function CounterStateReducer(state = initialState, action = {}) {
+export default function ServiceSearchStateReducer(state = initialState, action = {}) {
   switch (action.type) {
     case UPDATE_SUBURB_NAME:
       return state.update('suburb', suburb => action.suburb);

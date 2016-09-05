@@ -9,6 +9,4 @@ export async function centersBySuburb(suburb) {
   return await
     api
     .get("/services")
-    .then((data) => console.log('ok, ', data))
-    .catch((err)=> console.log('err', err))
 }

@@ -1,7 +1,7 @@
 /*eslint-disable react/prop-types*/
 
 import React from 'react';
-import CounterViewContainer from './counter/CounterViewContainer';
+import ServiceSearchViewContainer from './service_search/ServiceSearchViewContainer';
 import ColorViewContainer from './colors/ColorViewContainer';
 
 /**
@@ -10,8 +10,8 @@ import ColorViewContainer from './colors/ColorViewContainer';
 export default function AppRouter(props) {
   const key = props.scene.route.key;
 
-  if (key === 'Counter') {
-    return <CounterViewContainer />;
+  if (key === 'ServiceSearch') {
+    return <ServiceSearchViewContainer />;
   }
 
   if (key.indexOf('Color') === 0) {
