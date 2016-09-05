@@ -18,15 +18,11 @@ const ServiceSearchView = React.createClass({
     dispatch: PropTypes.func.isRequired
   },
   handleChange(event) {
+
     this.props.dispatch(ServiceSearchState.change(event.nativeEvent.text));
   },
   handleSubmit() {
     this.props.dispatch(ServiceSearchState.submit(this.props.suburb));
-
-    this.props.dispatch(NavigationState.pushRoute({
-      key: 'Color',
-      title: 'Color Screen'
-    }));
   },
 
   render() {

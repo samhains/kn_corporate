@@ -17,8 +17,8 @@ const SEARCH_REQUEST = 'ServiceSearchState/SEARCH_REQUEST';
 const SEARCH_RESPONSE = 'ServiceSearchState/SEARCH_RESPONSE';
 
 // Action creators
-export function submit(suburb) {
-  return {type: SEARCH_REQUEST, suburb };
+export function searchRequest() {
+  return {type: SEARCH_REQUEST};
 }
 
 export function change(suburb) {
@@ -38,19 +38,21 @@ export function requestCentersBySuburb(suburb) {
 export default function ServiceSearchStateReducer(state = initialState, action = {}) {
   switch (action.type) {
     case UPDATE_SUBURB_NAME:
-      return state.update('suburb', suburb => action.suburb);
+    return loop(
+      state.update('suburb', suburb => action.suburb),
+      Effects.constant(searchRequest())
+    );
 
     case SEARCH_REQUEST:
       return loop(
         state.set('loading', true),
-        Effects.promise(requestCentersBySuburb(action.suburb))
+        Effects.promise(requestCentersBySuburb(state.suburb))
       );
 
     case SEARCH_RESPONSE:
-      console.log('payload!', action.payload);
       return state
         .set('loading', false)
-        .set('value', action.payload);
+        .set('services', action.payload.data);
 
     default:
       return state;
