@@ -14,15 +14,33 @@ import {
 const ServiceSearchView = React.createClass({
   propTypes: {
     suburb: PropTypes.string,
+    services: PropTypes.array,
     loading: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired
   },
   handleChange(event) {
-
     this.props.dispatch(ServiceSearchState.change(event.nativeEvent.text));
   },
   handleSubmit() {
     this.props.dispatch(ServiceSearchState.submit(this.props.suburb));
+  },
+
+  renderResult(data) {
+    <Text>hey </Text>
+  },
+
+  renderSearchResults() {
+    if (!this.props.services) {
+      console.log("NEIN", this.props.services)
+      return null;
+    }
+
+    const results = this.props.services.map(renderResult)
+    return (
+        <View >
+          {results}
+        </View>
+    );
   },
 
   render() {

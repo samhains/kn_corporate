@@ -7,6 +7,7 @@ import * as SessionStateActions from '../modules/session/SessionState';
 import store from '../redux/store';
 import DeveloperMenu from '../components/DeveloperMenu';
 
+
 const AppView = React.createClass({
   propTypes: {
     isReady: PropTypes.bool.isRequired,
@@ -15,7 +16,7 @@ const AppView = React.createClass({
   },
   componentDidMount() {
 
-    snapshotUtil.resetSnapshot()
+    snapshotUtil.clearSnapshot()
       .then(snapshot => {
         const {dispatch} = this.props;
 

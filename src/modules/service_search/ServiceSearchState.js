@@ -1,6 +1,6 @@
 import {Map} from 'immutable';
 import {loop, Effects} from 'redux-loop';
-import {centersBySuburb} from '../../services/kindynow';
+import {servicesBySuburb} from '../../services/kindynow';
 import {generateRandomNumber} from '../../services/randomNumberService';
 
 // Initial state
@@ -25,11 +25,11 @@ export function change(suburb) {
   return {type: UPDATE_SUBURB_NAME, suburb };
 }
 
-export function requestCentersBySuburb(suburb) {
+export function requestServicesBySuburb(suburb) {
   return async () => {
     return {
       type: SEARCH_RESPONSE,
-      payload:  await centersBySuburb(suburb)
+      payload:  await servicesBySuburb(suburb)
     }
   };
 }
@@ -44,10 +44,11 @@ export default function ServiceSearchStateReducer(state = initialState, action =
     );
 
     case SEARCH_REQUEST:
+      const services = state.getIn(['serviceSearch', 'suburb'])
       return loop(
         state.set('loading', true),
-        Effects.promise(requestCentersBySuburb(state.suburb))
-      );
+        Effects.promise(requestServicesBySuburb(services))
+      )
 
     case SEARCH_RESPONSE:
       return state
